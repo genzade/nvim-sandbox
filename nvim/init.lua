@@ -1,10 +1,5 @@
-local modules = { "autocmds", "globals", "keymaps", "settings" }
+local modules = { "core", "plug" }
 
 for _, module in ipairs(modules) do
-  local ok, err = pcall(require, module)
-  if not ok then
-    error("Error loading " .. module .. "\n\n" .. err)
-  end
+  require(module).setup()
 end
-
-require("plugins").setup()
