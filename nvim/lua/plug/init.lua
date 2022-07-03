@@ -19,11 +19,34 @@ M.ensure_packer = function()
   end
 end
 
+-- local function scandir(directory)
+--   local i, t, popen = 0, {}, io.popen
+--   local pfile = popen("ls -a \"" .. directory .. "\"")
+--   for filename in pfile:lines() do
+--     i = i + 1
+--     t[i] = filename
+--   end
+--   pfile:close()
+--   return t
+-- end
+
+-- local plugin_list = function ()
+-- end
+
 M.packer_setup = function()
   require("packer").startup(
     {
       function(use)
         use("wbthomason/packer.nvim")
+
+        for _, file in ipairs(
+                         vim.fn.readdir(
+                           vim.fn.stdpath("config") .. "/lua/plugins",
+                           [[v:val =~ '\.lua$']]
+                         )
+                       ) do
+          use(require("plugins." .. file:gsub("%.lua$", "")))
+        end
       end,
       config = {
         display = {
