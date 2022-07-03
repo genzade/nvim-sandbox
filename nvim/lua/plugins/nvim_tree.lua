@@ -5,6 +5,7 @@ return {
     opt = true,
   },
   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+  event = "BufRead",
   config = function()
     local ok, nvim_tree = pcall(require, "nvim-tree")
 
@@ -16,5 +17,4 @@ return {
 
     nvim_tree.setup()
   end,
-
 }
