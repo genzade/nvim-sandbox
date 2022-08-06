@@ -3,6 +3,7 @@ FROM alpine:edge
 RUN apk update && \
   apk upgrade && \
   apk add --no-cache \
+  bash \
   curl \
   gcc \
   git \
@@ -10,6 +11,9 @@ RUN apk update && \
   musl-dev\
   vim \
   neovim \
+  fzf \
+  make \
+  ripgrep \
   py-pip \
   python3-dev \
   py3-pip && \
