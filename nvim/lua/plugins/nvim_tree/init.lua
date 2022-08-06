@@ -20,7 +20,7 @@ return {
     nvim_tree.setup(
       {
         view = {
-          width = 50,
+          width = FILETREE_WIDTH,
           preserve_window_proportions = true,
           mappings = {
             custom_only = false,
