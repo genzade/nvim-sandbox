@@ -1,9 +1,6 @@
 return {
   "kyazdani42/nvim-tree.lua",
-  requires = {
-    "kyazdani42/nvim-web-devicons",
-    opt = true,
-  },
+  requires = { "kyazdani42/nvim-web-devicons", opt = true },
   cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFileToggle" },
   event = "BufEnter",
   config = function()

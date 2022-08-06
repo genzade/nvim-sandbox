@@ -1,6 +1,6 @@
+local M = {}
 local fn = vim.fn
 local packer_bootstrap
-local M = {}
 
 M.ensure_packer = function()
   local install_path = DATA_PATH ..
@@ -17,7 +17,7 @@ M.ensure_packer = function()
   end
 end
 
-M.plugins_list = function()
+M.plugin_modules = function()
   local plugins_dir = fn.stdpath("config") .. "/lua/plugins"
 
   return fn.readdir(plugins_dir)
@@ -35,8 +35,8 @@ M.packer_setup = function()
       function(use)
         use("wbthomason/packer.nvim")
 
-        for _, file in ipairs(M.plugins_list()) do
-          use(require("plugins." .. file:gsub("%.lua$", "")))
+        for _, plugin_module in ipairs(M.plugin_modules()) do
+          use(require("plugins." .. plugin_module))
         end
 
         if packer_bootstrap then
