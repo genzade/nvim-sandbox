@@ -11,6 +11,7 @@ RUN apk update && \
   musl-dev\
   vim \
   neovim \
+  neovim-doc \
   fzf \
   make \
   ripgrep \
@@ -24,6 +25,7 @@ RUN pip3 install --upgrade pip neovim pynvim && \
 
 RUN mkdir -p /root/.config/nvim
 
+COPY code_samples /root/code_samples
 COPY nvim /root/.config/nvim
 
 WORKDIR /root
