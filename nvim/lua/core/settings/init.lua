@@ -29,3 +29,5 @@ wo.signcolumn = "yes"
 o.hidden = true
 
 o.termguicolors = true
+
+o.laststatus = 3
