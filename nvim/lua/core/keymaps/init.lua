@@ -1,9 +1,8 @@
 -- Keymaps
 -- Leader
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
+local map = vim.keymap.set
 
-map("n", "<Space>", "<NOP>", opts)
+map("n", "<Space>", "<NOP>")
 
 vim.g.mapleader = " "
 vim.g.loaded_ruby_provider = 0
@@ -13,24 +12,24 @@ map("n", ";", ":", { noremap = true })
 map("v", ";", ":", { noremap = true })
 
 -- Remove highlight search
-map("n", "<Leader><Space>", ":set hlsearch!<CR>", opts)
+map("n", "<Leader><Space>", ":set hlsearch!<CR>")
 
 -- Window naviagtion
-map("n", "<C-h>", "<C-w>h", opts)
-map("n", "<C-j>", "<C-w>j", opts)
-map("n", "<C-k>", "<C-w>k", opts)
-map("n", "<C-l>", "<C-w>l", opts)
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-l>", "<C-w>l")
 
 -- Tab navigation
-map("n", "tn", ":tabnext<CR>", opts)
-map("n", "tp", ":tabprevious<CR>", opts)
+map("n", "tn", ":tabnext<CR>")
+map("n", "tp", ":tabprevious<CR>")
 map("n", "tN", ":tabnew ", { noremap = true, silent = false })
-map("n", "T", ":tabnew %<CR>", opts)
+map("n", "T", ":tabnew %<CR>")
 
 -- copy filename to clipboard. TODO: refactor
-map("n", "cp", ":let @*=expand('%')<CR>", opts)
+map("n", "cp", ":let @*=expand('%')<CR>")
 
 -- keep cursor position centred
-map("n", "n", "nzzzv", opts)
-map("n", "N", "Nzzzv", opts)
-map("n", "J", "mzJ`z", opts)
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
+map("n", "J", "mzJ`z")

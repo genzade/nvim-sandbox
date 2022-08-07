@@ -1,11 +1,10 @@
 local config = function()
-  local map = vim.api.nvim_set_keymap
-  local opts = { noremap = true, silent = true }
+  local map = vim.keymap.set
 
   -- Buffer navigation
-  map("n", "<TAB>", "<CMD>BufferNext<CR>", opts)
-  map("n", "<S-TAB>", "<CMD>BufferPrevious<CR>", opts)
-  map("n", "<A-x>", "<CMD>BufferClose<CR>", opts)
+  map("n", "<TAB>", "<CMD>BufferNext<CR>")
+  map("n", "<S-TAB>", "<CMD>BufferPrevious<CR>")
+  map("n", "<A-x>", "<CMD>BufferClose<CR>")
 
   local bufferline_state = require("bufferline.state")
 
