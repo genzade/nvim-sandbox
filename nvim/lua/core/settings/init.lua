@@ -30,4 +30,6 @@ o.hidden = true
 
 o.termguicolors = true
 
+o.cursorline = true
+
 o.laststatus = 3
