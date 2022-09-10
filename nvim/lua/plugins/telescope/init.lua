@@ -33,30 +33,17 @@ local config = function()
 
   local map = vim.keymap.set
 
-  map(
-    "n", "<Leader>ff",
-    "<CMD>lua require('telescope.builtin').find_files()<CR>"
-  )
-  map(
-    "n", "<Leader>fb",
-    "<CMD>lua require('telescope.builtin').buffers()<CR>"
-  )
-  map(
-    "n", "<Leader>fg",
-    "<CMD>lua require('telescope.builtin').git_files()<CR>"
-  )
-  map(
-    "n", "<Leader>fs",
-    "<CMD>lua require('telescope.builtin').grep_string()<CR>"
-  )
-  map(
-    "n", "<Leader>fl",
-    "<CMD>lua require('telescope.builtin').live_grep()<CR>"
-  )
-  map(
-    "n", "<Leader>fh",
-    "<CMD>lua require('telescope.builtin').help_tags()<CR>"
-  )
+  local has_tbuiltin, tbuiltin = pcall(require, "telescope.builtin")
+  if not has_tbuiltin then
+    print("telescope builtin not ok ...........................")
+    return
+  end
+  map("n", "<Leader>ff", tbuiltin.find_files)
+  map("n", "<Leader>fb", tbuiltin.buffers)
+  map("n", "<Leader>fg", tbuiltin.git_files)
+  map("n", "<Leader>fs", tbuiltin.grep_string)
+  map("n", "<Leader>fl", tbuiltin.live_grep)
+  map("n", "<Leader>fh", tbuiltin.help_tags)
   map(
     "x", "<Leader>fs", function()
       local visual_selection = function()
@@ -76,9 +63,7 @@ local config = function()
         return text
       end
 
-      require("telescope.builtin").grep_string(
-        { search = visual_selection() }
-      )
+      tbuiltin.grep_string({ search = visual_selection() })
     end
   )
   map(
@@ -97,5 +82,6 @@ return {
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
   },
+  event = "VimEnter",
   config = config,
 }
