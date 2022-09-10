@@ -33,6 +33,7 @@ end
 
 return {
   "romgrk/barbar.nvim",
-  requires = { "kyazdani42/nvim-web-devicons", opt = true },
+  requires = { "kyazdani42/nvim-web-devicons" },
+  event = "BufAdd",
   config = config,
 }
