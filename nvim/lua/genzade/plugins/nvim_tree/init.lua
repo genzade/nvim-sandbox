@@ -48,7 +48,9 @@ local config = function()
         mappings = {
           custom_only = false,
           list = {
-            -- user mappings go here
+            { key = "C", action = "cd" },
+            { key = "R", action = "refresh" },
+            { key = "u", action = "dir_up" },
           },
         },
       },
