@@ -7,6 +7,35 @@ local config = function()
     return
   end
 
+  local augroup = vim.api.nvim_create_augroup
+  local autocmd = vim.api.nvim_create_autocmd
+  local set_hl = vim.api.nvim_set_hl
+  local colorscheme_group = augroup("NVIMTREE", { clear = false })
+
+  -- TODO: possibly move to after folder
+  autocmd(
+    "Colorscheme", {
+      pattern = "*",
+      group = colorscheme_group,
+      callback = function()
+        set_hl(0, "NvimTreeNormal", { bg = "#21252B", fg = "#9da5b3" })
+        set_hl(0, "NvimTreeBg", { bg = "#2B4252", fg = nil })
+      end,
+    }
+  )
+
+  autocmd(
+    "FileType", {
+      pattern = "NvimTree",
+      group = colorscheme_group,
+      callback = function()
+        vim.api.nvim_win_set_option(
+          0, "winhighlight", "Normal:NvimTreeBg"
+        )
+      end,
+    }
+  )
+
   local map = vim.keymap.set
 
   map("n", "<Leader>e", "<CMD>NvimTreeFindFileToggle<CR>")
