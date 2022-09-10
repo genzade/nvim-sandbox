@@ -5,7 +5,10 @@ M.setup = function()
     { "autocmds", "globals", "keymaps", "settings" }
 
   for _, module in ipairs(core_modules) do
-    local ok, err = pcall(require, "core" .. "." .. module)
+    local ok, err = pcall(
+                      require,
+                      "genzade" .. "." .. "core" .. "." .. module
+                    )
     if not ok then
       error("Error loading " .. module .. "\n\n" .. err)
     end

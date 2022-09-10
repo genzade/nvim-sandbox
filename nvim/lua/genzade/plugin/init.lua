@@ -18,9 +18,10 @@ M.ensure_packer = function()
 end
 
 M.plugin_modules = function()
-  local plugins_dir = fn.stdpath("config") .. "/lua/plugins"
+  local plug_dir =
+    fn.stdpath("config") .. "/lua/" .. "genzade" .. "/plugins"
 
-  return fn.readdir(plugins_dir)
+  return fn.readdir(plug_dir)
 end
 
 M.packer_setup = function()
@@ -35,8 +36,12 @@ M.packer_setup = function()
       function(use)
         use("wbthomason/packer.nvim")
 
-        for _, plugin_module in ipairs(M.plugin_modules()) do
-          use(require("plugins." .. plugin_module))
+        for _, module in ipairs(M.plugin_modules()) do
+          use(
+            require(
+              "genzade" .. "." .. "plugins" .. "." .. module
+            )
+          )
         end
 
         if packer_bootstrap then
