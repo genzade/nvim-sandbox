@@ -30,4 +30,6 @@ COPY nvim /root/.config/nvim
 
 WORKDIR /root
 
+ENV SHELL='bash'
+
 ENTRYPOINT ["sh"]
