@@ -3,6 +3,7 @@ FROM alpine:edge
 RUN apk update && \
   apk upgrade && \
   apk add --no-cache \
+  alpine-sdk \
   bash \
   curl \
   gcc \
@@ -15,6 +16,7 @@ RUN apk update && \
   fzf \
   make \
   ripgrep \
+  libluv \
   py-pip \
   python3-dev \
   py3-pip && \
