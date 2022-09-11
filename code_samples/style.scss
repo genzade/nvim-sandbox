@@ -1,0 +1,26 @@
+body {
+  font-size: 16px;
+  font-family: Calibri, sans-serif;
+  line-height: 22px;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+img {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.new-page {
+  page-break-before: always;
+}
