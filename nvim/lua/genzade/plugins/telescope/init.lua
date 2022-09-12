@@ -38,12 +38,16 @@ local config = function()
     print("telescope builtin not ok ...........................")
     return
   end
-  map("n", "<Leader>ff", tbuiltin.find_files)
+
+  map("n", "<Leader>fC", tbuiltin.command_history)
   map("n", "<Leader>fb", tbuiltin.buffers)
+  map("n", "<Leader>ff", tbuiltin.find_files)
   map("n", "<Leader>fg", tbuiltin.git_files)
-  map("n", "<Leader>fs", tbuiltin.grep_string)
-  map("n", "<Leader>fl", tbuiltin.live_grep)
   map("n", "<Leader>fh", tbuiltin.help_tags)
+  map("n", "<Leader>fl", tbuiltin.live_grep)
+  map("n", "<Leader>fr", tbuiltin.registers)
+  map("n", "<Leader>fs", tbuiltin.grep_string)
+
   map(
     "x", "<Leader>fs", function()
       local visual_selection = function()
@@ -66,11 +70,16 @@ local config = function()
       tbuiltin.grep_string({ search = visual_selection() })
     end
   )
+
   map(
     "n", "<Leader>fc", function()
-      local theme = require("telescope.themes").get_ivy()
+      -- local theme = require("telescope.themes").get_ivy()
+      local ok, telescope_theme = pcall(require, "telescope.themes")
+      if not ok then
+        return
+      end
 
-      require("telescope.builtin").current_buffer_fuzzy_find(theme)
+      tbuiltin.current_buffer_fuzzy_find(telescope_theme.get_ivy())
     end
   )
 end
