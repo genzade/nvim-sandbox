@@ -16,6 +16,7 @@ local config = function()
       filetype_exclude = {
         "NvimTree",
         "dashboard",
+        "startup",
         "help",
         "lspinfo",
         "markdown",
