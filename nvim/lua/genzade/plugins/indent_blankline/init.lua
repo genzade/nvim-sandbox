@@ -1,5 +1,4 @@
 vim.opt.list = true
-vim.opt.listchars:append("eol:↴")
 
 local config = function()
   local has_indent_blankline, indent_blankline =
