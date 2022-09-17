@@ -1,6 +1,11 @@
 local function config()
-  -- Lualine config
-  require("lualine").setup(
+  local ok, lualine = pcall(require, "lualine")
+  if not ok then
+    print("lualine not ok .....................................")
+    return
+  end
+
+  lualine.setup(
     {
       options = { theme = "onedark" },
       sections = {
@@ -17,7 +22,6 @@ end
 
 return {
   setup = function(use)
-    -- Status line
     use {
       "hoob3rt/lualine.nvim",
       requires = { "kyazdani42/nvim-web-devicons", opt = true },

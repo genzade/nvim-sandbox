@@ -1,12 +1,15 @@
 local config = function()
   local map = vim.keymap.set
 
-  -- Buffer navigation
   map("n", "<TAB>", "<CMD>BufferNext<CR>")
   map("n", "<S-TAB>", "<CMD>BufferPrevious<CR>")
   map("n", "<A-x>", "<CMD>BufferClose<CR>")
 
-  local bufferline_state = require("bufferline.state")
+  local ok, bufferline_state = pcall(require, "bufferline.state")
+  if not ok then
+    print("bufferline_state not ok ...........................")
+    return
+  end
 
   vim.api.nvim_create_autocmd(
     "BufWinEnter", {

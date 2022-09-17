@@ -73,7 +73,6 @@ local config = function()
 
   map(
     "n", "<Leader>fc", function()
-      -- local theme = require("telescope.themes").get_ivy()
       local ok, telescope_theme = pcall(require, "telescope.themes")
       if not ok then
         return

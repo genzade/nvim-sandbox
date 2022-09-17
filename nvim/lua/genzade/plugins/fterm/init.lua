@@ -29,7 +29,7 @@ local config = function()
   -- Commands for FTerm
   map(
     { "n", "t" }, "<C-\\>", function()
-      require("FTerm").toggle()
+      fterm.toggle()
     end
   )
 
