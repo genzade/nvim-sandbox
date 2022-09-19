@@ -1,0 +1,3 @@
+[submodule "code_samples/rails/rails7-on-docker"]
+	path = code_samples/rails/rails7-on-docker
+	url = https://github.com/ryanwi/rails7-on-docker
