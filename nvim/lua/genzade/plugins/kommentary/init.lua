@@ -1,7 +1,3 @@
-vim.highlight.create(
-  "Comment", { cterm = "italic", gui = "italic" }, false
-)
-
 local config = function()
   local ok, kommentary_config = pcall(require, "kommentary.config")
   if not ok then
@@ -13,6 +9,10 @@ local config = function()
   )
 
   kommentary_config.use_extended_mappings()
+
+  vim.api.nvim_set_hl(
+    0, "Comment", { italic = true }
+  )
 end
 
 return { "b3nj5m1n/kommentary", config = config }

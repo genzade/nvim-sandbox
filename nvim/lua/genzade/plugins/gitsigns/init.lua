@@ -1,24 +1,15 @@
 local config = function()
+  local set_hl = vim.api.nvim_set_hl
   local has_gitsigns, gitsigns = pcall(require, "gitsigns")
   if not has_gitsigns then
     return
   end
 
-  vim.highlight.create(
-    "SignColumn", { guifg = "NONE", ctermbg = "NONE" }, false
-  )
-  vim.highlight.create(
-    "GitSignsAdd", { guifg = "green", ctermbg = "NONE" }, false
-  )
-  vim.highlight.create(
-    "GitSignsChange ", { guifg = "yellow", ctermbg = "NONE" }, false
-  )
-  vim.highlight.create(
-    "GitSignsDelete ", { guifg = "red", ctermbg = "NONE" }, false
-  )
-  vim.highlight.create(
-    "VertSplit", { guifg = "NONE", ctermbg = "NONE" }, false
-  )
+  set_hl(0, "SignColumn", { fg = "NONE", bg = "NONE" })
+  set_hl(0, "GitSignsAdd", { fg = "Green", bg = "NONE" })
+  set_hl(0, "GitSignsChange", { fg = "Yellow", bg = "NONE" })
+  set_hl(0, "GitSignsDelete", { fg = "Red", bg = "NONE" })
+  set_hl(0, "VertSplit", { fg = "NONE", bg = "NONE" })
 
   gitsigns.setup(
     {

@@ -11,7 +11,7 @@ RUN apk update && \
   linux-headers \
   musl-dev\
   vim \
-  neovim \
+  neovim=0.8.0-r0 \
   neovim-doc \
   fzf \
   make \

@@ -52,8 +52,8 @@ local config = function()
   -- )
 
   -- might not be need post migration
-  vim.highlight.create(
-    "VertSplit", { guibg = "NONE", ctermbg = "NONE" }, false
+  vim.api.nvim_set_hl(
+    0, "VertSplit", { bg = "NONE" }
   )
 end
 

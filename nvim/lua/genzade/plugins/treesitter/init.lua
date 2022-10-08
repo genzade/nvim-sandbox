@@ -37,7 +37,6 @@ end
 
 return {
   "nvim-treesitter/nvim-treesitter",
-  -- run = ":TSUpdate",
   run = function()
     local ok, ts_install = pcall(require, "nvim-treesitter.install")
     if not ok then
