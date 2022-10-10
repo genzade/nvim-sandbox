@@ -1,5 +1,7 @@
 local config = function()
-  local projections = require("genzade.plugins.projectionist.projections")
+  local projections = require(
+                        "genzade.plugins.projectionist.projections"
+                      )
   -- have a look at https://github.com/veezus/clean-living/blob/24a4271a6c/.projections.json
   vim.g.projectionist_heuristics = {
     -- Rails
@@ -8,13 +10,24 @@ local config = function()
     ["Gemfile&!config/boot.rb&!spec/rails_helper.rb"] = projections.ruby_generic,
   }
 
-  local map = vim.api.nvim_set_keymap
-  local opts = { silent = true }
+  local which_key_ok, which_key = pcall(require, "which-key")
+  if not which_key_ok then
+    return
+  end
 
-  map("n", "<leader>aa", [[:A<CR>]], opts)
-  map("n", "<leader>av", [[:AV<CR>]], opts)
-  map("n", "<leader>as", [[:AS<CR>]], opts)
-  map("n", "<leader>at", [[:AT<CR>]], opts)
+  which_key.register(
+    {
+      ["<Leader>"] = {
+        a = {
+          name = "Projectionist",
+          a = { "<CMD>A<CR>", "Open alternate file" },
+          v = { "<CMD>AV<CR>", "Open alternate file (split vert)" },
+          s = { "<CMD>AS<CR>", "Open alternate file (split hor)" },
+          t = { "<CMD>AT<CR>", "Open alternate file (new tab)" },
+        },
+      },
+    }, { mode = "n" }
+  )
 end
 
 return { "tpope/vim-projectionist", config = config }

@@ -32,55 +32,78 @@ local config = function()
   telescope.load_extension("fzf")
   telescope.load_extension("notify")
 
-  local map = vim.keymap.set
-
   local has_tbuiltin, tbuiltin = pcall(require, "telescope.builtin")
   if not has_tbuiltin then
     print("telescope builtin not ok ...........................")
     return
   end
 
-  map("n", "<Leader>fC", tbuiltin.command_history)
-  map("n", "<Leader>fb", tbuiltin.buffers)
-  map("n", "<Leader>ff", tbuiltin.find_files)
-  map("n", "<Leader>fg", tbuiltin.git_files)
-  map("n", "<Leader>fh", tbuiltin.help_tags)
-  map("n", "<Leader>fl", tbuiltin.live_grep)
-  map("n", "<Leader>fr", tbuiltin.registers)
-  map("n", "<Leader>fs", tbuiltin.grep_string)
+  local which_key_ok, which_key = pcall(require, "which-key")
+  if not which_key_ok then
+    return
+  end
 
-  map(
-    "x", "<Leader>fs", function()
-      local visual_selection = function()
-        -- Get visually selected text
-        vim.cmd("noau normal! \"vy\"")
+  which_key.register(
+    {
+      ["<Leader>"] = {
+        f = {
+          name = "+file",
+          C = { tbuiltin.command_history, "Search command history" },
+          b = { tbuiltin.buffers, "Find opened buffers" },
+          c = {
+            function()
+              local ok, theme = pcall(require, "telescope.themes")
+              if not ok then
+                return
+              end
 
-        local text = vim.fn.getreg("v")
-
-        vim.fn.setreg("v", {})
-
-        text = string.gsub(text, "\n", "")
-
-        if string.len(text) == 0 then
-          text = nil
-        end
-
-        return text
-      end
-
-      tbuiltin.grep_string({ search = visual_selection() })
-    end
+              tbuiltin.current_buffer_fuzzy_find(theme.get_ivy())
+            end,
+            "Search current buffer",
+          },
+          f = { tbuiltin.find_files, "Find File" },
+          g = { tbuiltin.git_files, "Find git files" },
+          h = { tbuiltin.help_tags, "Search help docs" },
+          l = { tbuiltin.live_grep, "Search string" },
+          r = { tbuiltin.registers, "Search registers" },
+          s = { tbuiltin.grep_string, "Find word under cursor" },
+          n = { "<CMD>Telescope notify<CR>", "Search notification" },
+        },
+      },
+    }, { mode = "n" }
   )
 
-  map(
-    "n", "<Leader>fc", function()
-      local ok, telescope_theme = pcall(require, "telescope.themes")
-      if not ok then
-        return
-      end
+  which_key.register(
+    {
+      ["<Leader>"] = {
+        f = {
+          name = "+file",
+          s = {
+            function()
+              local visual_selection = function()
+                -- Get visually selected text
+                vim.cmd("noau normal! \"vy\"")
 
-      tbuiltin.current_buffer_fuzzy_find(telescope_theme.get_ivy())
-    end
+                local text = vim.fn.getreg("v")
+
+                vim.fn.setreg("v", {})
+
+                text = string.gsub(text, "\n", "")
+
+                if string.len(text) == 0 then
+                  text = nil
+                end
+
+                return text
+              end
+
+              tbuiltin.grep_string({ search = visual_selection() })
+            end,
+            "Find visually selected word/s",
+          },
+        },
+      },
+    }, { mode = "x" }
   )
 end
 
@@ -90,6 +113,7 @@ return {
     { "nvim-lua/popup.nvim" },
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    { "folke/which-key.nvim" },
   },
   event = "VimEnter",
   config = config,

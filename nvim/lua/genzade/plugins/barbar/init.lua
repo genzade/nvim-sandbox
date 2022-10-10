@@ -1,9 +1,19 @@
 local config = function()
-  local map = vim.keymap.set
+  local which_key_ok, which_key = pcall(require, "which-key")
+  if not which_key_ok then
+    return
+  end
 
-  map("n", "<TAB>", "<CMD>BufferNext<CR>")
-  map("n", "<S-TAB>", "<CMD>BufferPrevious<CR>")
-  map("n", "<A-x>", "<CMD>BufferClose<CR>")
+  which_key.register(
+    {
+      ["<A-x>"] = { "<CMD>BufferClose<CR>", "Close the buffer" },
+      ["<TAB>"] = { "<CMD>BufferNext<CR>", "Go to next buffer" },
+      ["<S-TAB>"] = {
+        "<CMD>BufferPrevious<CR>",
+        "Go to previous buffer",
+      },
+    }, { mode = "n" }
+  )
 
   local ok, bufferline_state = pcall(require, "bufferline.state")
   if not ok then

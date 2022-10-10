@@ -1,3 +1,4 @@
+-- TODO: use which-key here
 -- Keymaps
 -- Leader
 local map = vim.keymap.set

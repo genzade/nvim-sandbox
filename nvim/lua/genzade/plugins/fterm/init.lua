@@ -19,21 +19,22 @@ local config = function()
     }
   )
 
-  -- Keybinding
-  local map = vim.keymap.set
-  local opts = { silent = true }
+  local which_key_ok, which_key = pcall(require, "which-key")
+  if not which_key_ok then
+    return
+  end
 
-  -- Closer to the metal
-  map({ "n", "t" }, "<C-t>", fterm.toggle, opts)
-
-  -- Commands for FTerm
-  map(
-    { "n", "t" }, "<C-\\>", function()
-      fterm.toggle()
-    end
+  which_key.register(
+    { ["<C-t>"] = { fterm.toggle, "Toggle built in terminal" } },
+    { mode = "t" }
   )
 
-  -- TODO: uncomment when lazygit is installed
+  which_key.register(
+    { ["<C-t>"] = { fterm.toggle, "Toggle built in terminal" } },
+    { mode = "n" }
+  )
+
+  -- TODO: uncomment when lazygit is installed, rewrite with `which_key`
   -- -- LazyGit integration
   -- map(
   --   "n", "<Leader>g", function()
@@ -52,9 +53,7 @@ local config = function()
   -- )
 
   -- might not be need post migration
-  vim.api.nvim_set_hl(
-    0, "VertSplit", { bg = "NONE" }
-  )
+  vim.api.nvim_set_hl(0, "VertSplit", { bg = "NONE" })
 end
 
 return { "numtostr/FTerm.nvim", config = config }
