@@ -15,9 +15,9 @@ local config = function()
     }, { mode = "n" }
   )
 
-  local ok, bufferline_state = pcall(require, "bufferline.state")
+  local ok, bufferline_api = pcall(require, "bufferline.api")
   if not ok then
-    print("bufferline_state not ok ...........................")
+    print("bufferline_api not ok ...........................")
     return
   end
 
@@ -26,7 +26,7 @@ local config = function()
       pattern = "*",
       callback = function()
         if vim.bo.filetype == "NvimTree" then
-          bufferline_state.set_offset(FILETREE_WIDTH, "FileTree")
+          bufferline_api.set_offset(FILETREE_WIDTH, "FileTree")
         end
       end,
     }
@@ -37,7 +37,7 @@ local config = function()
       pattern = "*",
       callback = function()
         if vim.fn.expand("<afile>"):match("NvimTree") then
-          bufferline_state.set_offset(0)
+          bufferline_api.set_offset(0)
         end
       end,
     }
