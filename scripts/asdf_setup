@@ -1,0 +1,34 @@
+#! /bin/bash
+
+err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+}
+
+# Print error message and quit
+abort() {
+  err "$1"
+  exit 1
+}
+
+# Install asdf
+git clone 'https://github.com/asdf-vm/asdf.git' "${HOME}/.asdf"
+cd "${HOME}/.asdf" || abort 'Failed cloning asdf-vm'
+git checkout "$(git describe --abbrev=0 --tags)"
+
+source "${HOME}/.asdf/asdf.sh"
+
+# lua
+asdf plugin-add lua 'https://github.com/Stratus3D/asdf-lua.git'
+asdf install lua latest
+asdf global lua "$(asdf list lua |  tail -n 1 | xargs)"
+
+# ruby
+asdf plugin add ruby 'https://github.com/asdf-vm/asdf-ruby.git'
+asdf install ruby latest
+asdf global ruby "$(asdf list ruby |  tail -n 1 | xargs)"
+
+# nodejs
+asdf plugin-add nodejs 'https://github.com/asdf-vm/asdf-nodejs.git'
+bash -c '${ASDF_DATA_DIR:-$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
+asdf install nodejs latest
+asdf global nodejs "$(asdf list nodejs |  tail -n 1 | xargs)"
