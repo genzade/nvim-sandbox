@@ -4,29 +4,31 @@ local config = function()
     print("telescope not ok ..................................")
     return
   end
-  telescope.setup {
-    defaults = {
-      prompt_prefix = "$ ",
-      vimgrep_arguments = {
-        "rg",
-        "--color=never",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
+  telescope.setup(
+    {
+      defaults = {
+        prompt_prefix = "$ ",
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+        },
       },
-    },
-    extensions = {
-      fzf = {
-        fuzzy = true, -- false will only do exact matching
-        override_generic_sorter = false, -- override the generic sorter
-        override_file_sorter = true, -- override the file sorter
-        -- case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-        -- the default case_mode is "smart_case"
+      extensions = {
+        fzf = {
+          fuzzy = true, -- false will only do exact matching
+          override_generic_sorter = false, -- override the generic sorter
+          override_file_sorter = true, -- override the file sorter
+          -- case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+          -- the default case_mode is "smart_case"
+        },
       },
-    },
-  }
+    }
+  )
   -- To get fzf loaded and working with telescope, you need to call
   -- load_extension, somewhere after setup function:
   telescope.load_extension("fzf")
@@ -47,10 +49,9 @@ local config = function()
     {
       ["<Leader>"] = {
         f = {
-          name = "+file",
-          C = { tbuiltin.command_history, "Search command history" },
-          b = { tbuiltin.buffers, "Find opened buffers" },
-          c = {
+          name = "+Telescope",
+          B = { tbuiltin.buffers, "Find opened buffers" },
+          b = {
             function()
               local ok, theme = pcall(require, "telescope.themes")
               if not ok then
@@ -61,8 +62,11 @@ local config = function()
             end,
             "Search current buffer",
           },
+          C = { tbuiltin.command_history, "Search command history" },
+          c = { tbuiltin.commands, "Search available commands" },
           f = { tbuiltin.find_files, "Find File" },
           g = { tbuiltin.git_files, "Find git files" },
+          G = { tbuiltin.git_commits, "Search git commits" },
           h = { tbuiltin.help_tags, "Search help docs" },
           l = { tbuiltin.live_grep, "Search string" },
           r = { tbuiltin.registers, "Search registers" },
@@ -77,7 +81,7 @@ local config = function()
     {
       ["<Leader>"] = {
         f = {
-          name = "+file",
+          name = "+Telescope (x)",
           s = {
             function()
               local visual_selection = function()
