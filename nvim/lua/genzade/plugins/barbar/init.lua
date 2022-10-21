@@ -47,6 +47,5 @@ end
 return {
   "romgrk/barbar.nvim",
   requires = { "folke/which-key.nvim", "kyazdani42/nvim-web-devicons" },
-  event = "BufAdd",
   config = config,
 }
