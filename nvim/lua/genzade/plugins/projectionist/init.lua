@@ -30,4 +30,8 @@ local config = function()
   )
 end
 
-return { "tpope/vim-projectionist", config = config }
+return {
+  "tpope/vim-projectionist",
+  requires = { "folke/which-key.nvim" },
+  config = config,
+}

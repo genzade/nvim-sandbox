@@ -170,7 +170,7 @@ end
 
 return {
   "lewis6991/gitsigns.nvim",
-  requires = { "nvim-lua/plenary.nvim" },
+  requires = { "nvim-lua/plenary.nvim", "folke/which-key.nvim" },
   event = "BufRead",
   config = config,
 }

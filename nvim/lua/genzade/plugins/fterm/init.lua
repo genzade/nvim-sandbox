@@ -30,12 +30,29 @@ local config = function()
   )
 
   which_key.register(
-    { ["<C-t>"] = { fterm.toggle, "Toggle built in terminal" } },
-    { mode = "n" }
+    {
+      ["<C-t>"] = { fterm.toggle, "Toggle built in terminal" },
+      -- TODO: uncomment when lazygit is installed, rewrite with `which_key`
+      -- -- LazyGit integration
+      -- ["<Leader>"] = {
+      --   g = function()
+      --     local term = require("FTerm.terminal")
+      --     local lazygit = term:new()
+
+      --     vim.api.nvim_get_current_buf()
+      --     lazygit:setup(
+      --       {
+      --         dimensions = default_dimmensions,
+      --         border = "single", -- or 'double'
+      --         cmd = "lazygit",
+      --       }
+      --     )
+      --   end,
+      --   "Open Lazygit terminal",
+      -- },
+    }
   )
 
-  -- TODO: uncomment when lazygit is installed, rewrite with `which_key`
-  -- -- LazyGit integration
   -- map(
   --   "n", "<Leader>g", function()
   --     local term = require("FTerm.terminal")
@@ -56,4 +73,8 @@ local config = function()
   vim.api.nvim_set_hl(0, "VertSplit", { bg = "NONE" })
 end
 
-return { "numtostr/FTerm.nvim", config = config }
+return {
+  "numtostr/FTerm.nvim",
+  requires = { "folke/which-key.nvim" },
+  config = config,
+}
