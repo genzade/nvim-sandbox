@@ -19,7 +19,7 @@ end
 
 M.plugin_modules = function()
   local config_path = fn.stdpath("config")
-  local plug_dir = config_path .. "/lua/" .. "genzade" .. "/plugins"
+  local plug_dir = config_path .. "/lua" .. "/genzade" .. "/plugins"
 
   return fn.readdir(plug_dir)
 end
