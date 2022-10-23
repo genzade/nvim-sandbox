@@ -36,10 +36,6 @@ local config = function()
     }
   )
 
-  -- local map = vim.keymap.set
-
-  -- map("n", "<Leader>e", "<CMD>NvimTreeFindFileToggle<CR>")
-
   local which_key_ok, which_key = pcall(require, "which-key")
   if not which_key_ok then
     return
