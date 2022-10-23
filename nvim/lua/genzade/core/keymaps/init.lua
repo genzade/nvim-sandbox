@@ -24,6 +24,8 @@ map("n", "<C-l>", "<C-w>l")
 -- Tab navigation
 map("n", "tn", ":tabnext<CR>")
 map("n", "tp", ":tabprevious<CR>")
+map("n", "tl", ":tablast<CR>")
+map("n", "tf", ":tabfirst<CR>")
 map("n", "tN", ":tabnew ", { noremap = true, silent = false })
 map("n", "T", ":tabnew %<CR>")
 
