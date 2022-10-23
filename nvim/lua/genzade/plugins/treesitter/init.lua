@@ -26,13 +26,54 @@ local config = function()
       indent = { enable = true },
       -- needs testing post migration
       textobjects = {
+        lsp_interop = {
+          enable = true,
+          border = "none",
+          peek_definition_code = {
+            ["<leader>df"] = {
+              query = "@function.outer",
+              desc = "Peek function",
+            },
+            ["<leader>dF"] = {
+              query = "@class.outer",
+              desc = "Peek class",
+            },
+          },
+        },
         select = {
           enable = true,
           keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
+            ["af"] = {
+              query = "@function.outer",
+              desc = "Select around function",
+            },
+            ["if"] = {
+              query = "@function.inner",
+              desc = "Select inner function",
+            },
+            ["ac"] = {
+              query = "@class.outer",
+              desc = "Select around function",
+            },
+            ["ic"] = {
+              query = "@class.inner",
+              desc = "Select inner part of a class region",
+            },
+          },
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<leader>a"] = {
+              query = "@parameter.inner",
+              desc = "Swap with next parameter",
+            },
+          },
+          swap_previous = {
+            ["<leader>A"] = {
+              query = "@parameter.inner",
+              desc = "Swap with previous parameter",
+            },
           },
         },
       },
@@ -50,5 +91,9 @@ return {
 
     ts_install.update({ with_sync = true })
   end,
+  requires = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    after = "nvim-treesitter",
+  },
   config = config,
 }
