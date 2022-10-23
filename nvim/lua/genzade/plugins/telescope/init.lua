@@ -33,6 +33,7 @@ local config = function()
   -- load_extension, somewhere after setup function:
   telescope.load_extension("fzf")
   telescope.load_extension("notify")
+  telescope.load_extension("neoclip")
 
   local has_tbuiltin, tbuiltin = pcall(require, "telescope.builtin")
   if not has_tbuiltin then
@@ -71,6 +72,7 @@ local config = function()
           l = { tbuiltin.live_grep, "Search string" },
           r = { tbuiltin.registers, "Search registers" },
           s = { tbuiltin.grep_string, "Find word under cursor" },
+          p = { tbuiltin.neoclip, "Search yank registers" },
           n = { "<CMD>Telescope notify<CR>", "Search notification" },
         },
       },
