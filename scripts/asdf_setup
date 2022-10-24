@@ -32,3 +32,8 @@ asdf plugin-add nodejs 'https://github.com/asdf-vm/asdf-nodejs.git'
 bash -c '${ASDF_DATA_DIR:-$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
 asdf install nodejs latest
 asdf global nodejs "$(asdf list nodejs |  tail -n 1 | xargs)"
+
+# yarn
+asdf plugin-add yarn 'https://github.com/twuni/asdf-yarn'
+asdf install yarn latest
+asdf global yarn "$(asdf list yarn |  tail -n 1 | xargs)"
