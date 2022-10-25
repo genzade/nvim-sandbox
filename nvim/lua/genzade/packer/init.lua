@@ -1,5 +1,6 @@
 local M = {}
 local fn = vim.fn
+local nvim_cmd = vim.api.nvim_cmd
 local packer_bootstrap
 
 M.ensure_packer = function()
@@ -13,7 +14,8 @@ M.ensure_packer = function()
       "https://github.com/wbthomason/packer.nvim",
       install_path,
     }
-    vim.cmd [[packadd packer.nvim]]
+
+    nvim_cmd({ cmd = "packadd", args = { "packer.nvim" } }, {})
   end
 end
 

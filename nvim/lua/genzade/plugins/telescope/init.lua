@@ -88,7 +88,12 @@ local config = function()
             function()
               local visual_selection = function()
                 -- Get visually selected text
+
+                -- TODO: make this work with new nvim_cmd api
                 vim.cmd("noau normal! \"vy\"")
+                -- vim.api.nvim_cmd(
+                --   { cmd = "noau normal!", args = { "\"vy\"" } }, {}
+                -- )
 
                 local text = vim.fn.getreg("v")
 
