@@ -181,6 +181,7 @@ local config = function()
 
   cmp.setup.cmdline(
     "/", {
+      mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources(
         { { name = "nvim_lsp_document_symbol" } },
         { { name = "buffer" } }
@@ -190,6 +191,7 @@ local config = function()
 
   cmp.setup.cmdline(
     ":", {
+      mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources(
         { { name = "path" } }, {
           -- increase keyword_length if it gets annoying
