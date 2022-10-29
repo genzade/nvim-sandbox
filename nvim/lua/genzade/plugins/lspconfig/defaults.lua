@@ -47,6 +47,18 @@ M.keymaps = function()
   )
 end
 
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format(
+    {
+      filter = function(client)
+        return client.name == "null-ls"
+      end,
+      bufnr = bufnr,
+    }
+  )
+end
+
 M.on_attach = function(client, bufnr)
   vim.inspect(bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -57,6 +69,19 @@ M.on_attach = function(client, bufnr)
   -- require("lsp_signature").setup({})
 
   M.keymaps()
+
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd(
+      "BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          lsp_formatting(bufnr)
+        end,
+      }
+    )
+  end
 end
 
 return M
